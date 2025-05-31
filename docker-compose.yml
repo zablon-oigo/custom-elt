@@ -11,6 +11,8 @@ services:
       POSTGRES_DB: source_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
+    volumes:
+      - ./source/init.sql:/docker-entrypoint-initdb.d/init.sql
   
   destination_postgres:
     image: postgres:16

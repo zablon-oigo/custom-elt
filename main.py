@@ -16,3 +16,7 @@ def wait_for_postgres(host, max_retries=5, delay_seconds=5):
             print(
                 f"Retrying in {delay_seconds} seconds... (Attempt {retries}/{max_retries})")
             time.sleep(delay_seconds)
+if not wait_for_postgres(host="source_postgres"):
+    exit(1)
+
+print("Starting ELT script")

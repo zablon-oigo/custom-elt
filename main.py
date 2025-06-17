@@ -20,3 +20,10 @@ if not wait_for_postgres(host="source_postgres"):
     exit(1)
 
 print("Starting ELT script")
+
+source_config = {
+    'dbname': 'source_db',
+    'user': 'postgres',
+    'password': 'secret',
+    'host': 'source_postgres'
+}

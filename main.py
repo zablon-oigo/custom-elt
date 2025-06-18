@@ -11,3 +11,10 @@ def wait_for_postgres(host, max_retries=5, delay_seconds=5):
                 capture_output=True,
                 text=True
             )
+            if "accepting connections" in result.stdout:
+                print(f"[INFO] PostgreSQL at {host} is ready.")
+                return True
+        
+            except subprocess.CalledProcessError:
+            print(f"[WARN] PostgreSQL not ready on attempt {attempt}/{max_retries}. Retrying in {delay_seconds}s...")
+            time.sleep(delay_seconds)

@@ -3,27 +3,11 @@ import time
 
 
 def wait_for_postgres(host, max_retries=5, delay_seconds=5):
-      retries = 0
-    while retries < max_retries:
+    for attempt in range(1, max_retries + 1):
         try:
             result = subprocess.run(
-                  ["pg_isready", "-h", host], check=True, capture_output=True, text=True
+                ["pg_isready", "-h", host],
+                check=True,
+                capture_output=True,
+                text=True
             )
-         if "accepting connections" in result.stdout:
-                print(f"Error connecting to PostgreSQL: {e}")
-               
-                           retries += 1
-            print(
-                f"Retrying in {delay_seconds} seconds... (Attempt {retries}/{max_retries})")
-            time.sleep(delay_seconds)
-if not wait_for_postgres(host="source_postgres"):
-    exit(1)
-
-print("Starting ELT script")
-
-source_config = {
-    'dbname': 'source_db',
-    'user': 'postgres',
-    'password': 'secret',
-    'host': 'source_postgres'
-}

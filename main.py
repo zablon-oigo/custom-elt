@@ -18,3 +18,13 @@ def wait_for_postgres(host, max_retries=5, delay_seconds=5):
             except subprocess.CalledProcessError:
             print(f"[WARN] PostgreSQL not ready on attempt {attempt}/{max_retries}. Retrying in {delay_seconds}s...")
             time.sleep(delay_seconds)
+
+def run_command(command, env, description):
+    print(f"[INFO] Running: {description}")
+    try:
+        subprocess.run(command, env=env, check=True)
+        print(f"[SUCCESS] {description} completed.")
+    except subprocess.CalledProcessError as e:
+        print(f"[ERROR] Failed during: {description}")
+        print(e)
+        sys.exit(1)

@@ -28,3 +28,10 @@ def run_command(command, env, description):
         print(f"[ERROR] Failed during: {description}")
         print(e)
         sys.exit(1)
+def main():
+    source = {
+        'dbname': 'source_db',
+        'user': 'postgres',
+        'password': 'secret',
+        'host': 'source_postgres'
+    }

@@ -35,3 +35,4 @@ def main():
         'password': 'secret',
         'host': 'source_postgres'
     }
+run_command(dump_cmd, env={'PGPASSWORD': source['password']}, description="Dumping source database")
